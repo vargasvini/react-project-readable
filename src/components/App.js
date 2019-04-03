@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import LoadingBar from 'react-redux-loading'
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { handleInitialData } from '../actions/shared'
 import '../App.css';
 
 class App extends Component {
   componentDidMount() {
-    showLoading()
-    hideLoading()
+    handleInitialData()
   }
   render() {
     return (
@@ -16,8 +15,9 @@ class App extends Component {
           TESTE
         </div>
       </Fragment>
-    );
+    )
   }
 }
 
-export default App;
+
+export default App
