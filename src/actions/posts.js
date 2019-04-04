@@ -1,3 +1,4 @@
+
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 
 export function receivePosts (posts) {
@@ -6,3 +7,10 @@ export function receivePosts (posts) {
     posts,
   }
 }
+
+// export const receivePosts = posts => ({
+//   type: RECEIVE_POSTS,
+//   posts
+// });
+
+
