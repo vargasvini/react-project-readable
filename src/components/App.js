@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
 import { connect } from 'react-redux';
+import Dashboard from './Dashboard'
 import '../App.css';
 import posts from '../reducers/posts';
 
@@ -12,10 +13,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <LoadingBar/>
-        <div className="App">
-          TESTE
-        </div>
+        {this.props.loading === true
+        ? null
+        : <Dashboard></Dashboard>}
       </Fragment>
     )
   }
@@ -29,5 +29,9 @@ class App extends Component {
     
 //   }
 // }
-const mapStateToProps = ({ posts }) => ({ posts });
+function mapStateToProps ({ posts }) {
+  return{
+    loading: posts === null
+  }
+}
 export default connect(mapStateToProps)(App)
