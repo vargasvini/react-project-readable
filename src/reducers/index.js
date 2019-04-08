@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux'
-import posts from './posts'
-import {loadingBarReducer} from 'react-redux-loading'
+import { combineReducers } from 'redux';
+import { categoryReducer } from './categoryReducer';
+import { postReducer } from './postReducer'
 
 
 export default combineReducers({
-    posts,
-    loadingBar: loadingBarReducer,
-  })
+  category: categoryReducer,
+  post: postReducer,
+});

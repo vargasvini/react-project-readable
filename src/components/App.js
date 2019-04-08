@@ -1,37 +1,45 @@
-import React, { Component, Fragment } from 'react';
-import LoadingBar from 'react-redux-loading'
-import { handleInitialData } from '../actions/shared'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Dashboard from './Dashboard'
 import '../App.css';
-import posts from '../reducers/posts';
 
-class App extends Component {
+import MainPage from '../components/MainPage';
+import PostList from '../components/PostList';
+import { categoriesAPI } from '../actions/category';
+import { postsAPI } from '../actions/post';
+
+class App extends React.Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    this.props.getCategories();
   }
+
   render() {
     return (
-      <Fragment>
-        {this.props.loading === true
-        ? null
-        : <Dashboard></Dashboard>}
-      </Fragment>
-    )
+      <div className="App">
+        <MainPage />
+        <Switch>
+          <Route exact path="/" component={PostList} />
+          {/* <Route exact path="/" component={PostForm} /> */}
+          <Route exact path="/category/:category" component={PostList} />
+          {/* <Route path="/category/:category/:postId" component={PostDetails} /> */}
+          {/* <Route component={NotFound} /> */}
+        </Switch>
+      </div>
+    );
   }
 }
 
+App.propTypes = {
+  getCategories: PropTypes.func,
 
-// // export default connect({getPosts: postsAPI})(App)
-// function mapStateToProps ({tete}) {
-//   return {
-//     //loading: authedUser === null
-    
-//   }
-// }
-function mapStateToProps ({ posts }) {
-  return{
-    loading: posts === null
-  }
-}
-export default connect(mapStateToProps)(App)
+};
+
+export default withRouter(
+  connect(null, {
+    getCategories: categoriesAPI,
+    getPosts: postsAPI
+  })(App)
+);
+
+
